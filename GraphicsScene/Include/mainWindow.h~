@@ -31,7 +31,7 @@ Q_OBJECT
    void _connectSignals(void);
 
    QMenu *_fileMenu, *_toolMenu, *_styleMenu, *_helpMenu;
-   QMenu *_penSubMenu, *_brushSubMenu, *_fontSubMenu;
+   QMenu *_penSubMenu;
    QMenu *_penLineSubMenu, *_penWidthSubMenu;
    QToolBar *_toolBar;
    QAction *_newAction,*_openAction, *_exitAction, *_saveAction, *_saveAsAction;

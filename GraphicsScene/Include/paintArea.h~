@@ -9,7 +9,6 @@
 #include <QGraphicsSceneMouseEvent>
 #include <QPainter>
 #include <QDebug>
-#include "enums.h"
 
 class PaintArea : public QGraphicsScene
 {

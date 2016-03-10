@@ -77,9 +77,6 @@ void MainWindow::_createActions(void) {
 
  _freehandAct->setCheckable(true);
  _lineAct->setCheckable(true);
- _rectangleAct->setCheckable(true);
- _ellipseAct->setCheckable(true);
- _polygonAct->setCheckable(true);
 }
 
 void MainWindow::_connectActions(void) {

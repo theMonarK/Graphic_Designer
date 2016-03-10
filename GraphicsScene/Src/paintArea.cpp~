@@ -55,7 +55,7 @@ void PaintArea::mouseReleaseEvent(QGraphicsSceneMouseEvent* evt)
   else if (_startPoint != _endPoint) {
     switch(_currentTool){
       
-      case TOOLS_ID_FREEHAND:{
+      case 0:{
 	QGraphicsLineItem *line = addLine( _startPoint.x(), _startPoint.y(), _endPoint.x(), _endPoint.y() );
 	line->setFlag(QGraphicsItem::ItemIsMovable);
 	break;
@@ -67,19 +67,19 @@ void PaintArea::mouseReleaseEvent(QGraphicsSceneMouseEvent* evt)
 	break;
       }
       
-      case TOOLS_ID_RECTANGLE:{
+      case 2:{
 	QGraphicsRectItem *rect = addRect(_startPoint.x(), _startPoint.y(), _endPoint.x() - _startPoint.x(), _endPoint.y() - _startPoint.y());
 	rect->setFlag(QGraphicsItem::ItemIsMovable);
 	break;
       }
       
-      case TOOLS_ID_CIRCLE:{
+      case 3:{
 	QGraphicsEllipseItem *ellipse = addEllipse(_startPoint.x(), _startPoint.y(), _endPoint.x() - _startPoint.x(), _endPoint.y() - _startPoint.y());
 	ellipse->setFlag(QGraphicsItem::ItemIsMovable);
 	break;
       }
       
-      case TOOLS_ID_POLYGON:{
+      case 4:{
 	QGraphicsLineItem *line = addLine( _startPoint.x(), _startPoint.y(), _endPoint.x(), _endPoint.y() );
 	line->setFlag(QGraphicsItem::ItemIsMovable);
 	break;
