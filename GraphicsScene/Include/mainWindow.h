@@ -15,6 +15,10 @@
 #include <QSignalMapper>
 #include <QGraphicsView>
 #include <QGraphicsScene>
+#include <QFileDialog>
+#include <QSpinBox>
+#include <QFontDialog>
+#include <QColorDialog>
 #include "enums.h"
 
 class MainWindow : public QMainWindow
@@ -31,20 +35,29 @@ Q_OBJECT
    void _connectSignals(void);
 
    QMenu *_fileMenu, *_toolMenu, *_styleMenu, *_helpMenu;
-   QMenu *_penSubMenu, *_brushSubMenu, *_fontSubMenu;
+   QMenu *_penSubMenu, *_brushSubMenu, *_fontSubMenu, *_brushFillSubMenu;
    QMenu *_penLineSubMenu, *_penWidthSubMenu;
    QToolBar *_toolBar;
    QAction *_newAction,*_openAction, *_exitAction, *_saveAction, *_saveAsAction;
    QAction *_aboutAction, *_aboutQtAction;
-   QAction *_freehandAct, *_lineAct, *_rectangleAct, *_ellipseAct, *_polygonAct;
-   QAction *_penColorAct;
+   QAction *_freehandAct, *_lineAct, *_rectangleAct, *_ellipseAct, *_polygonAct, *_textAct;
+   QAction *_penColorAct, *_penWidthAct;
+   QAction *_brushColorAct, *_brushFillAct;
+   QAction *_fontAct;
    QActionGroup *_toolsQag;
    QSignalMapper *_signalMapper;
   private slots :
      void _newFile();
+     void _saveFile();
+     void _openFile();
      void _exit();
      void _about();
      void _aboutQt();
+     void _penColor();
+     void _penWidth();
+     void _brushColor();
+     void _brushFill();
+     void _font();
   signals:
    void toolMapped(int digit);
 };

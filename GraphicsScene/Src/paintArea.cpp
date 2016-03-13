@@ -53,36 +53,48 @@ void PaintArea::mouseReleaseEvent(QGraphicsSceneMouseEvent* evt)
     _item=NULL;
   }
   else if (_startPoint != _endPoint) {
-    switch(_currentTool){
-      
-      case TOOLS_ID_FREEHAND:{
-	QGraphicsLineItem *line = addLine( _startPoint.x(), _startPoint.y(), _endPoint.x(), _endPoint.y() );
-	line->setFlag(QGraphicsItem::ItemIsMovable);
-	break;
+      switch(_currentTool){
+      case TOOLS_ID_FREEHAND:
+      {
+          break;
       }
       
-      case TOOLS_ID_LINE:{
-	QGraphicsLineItem *line = addLine( _startPoint.x(), _startPoint.y(), _endPoint.x(), _endPoint.y() );
-	line->setFlag(QGraphicsItem::ItemIsMovable);
-	break;
+      case TOOLS_ID_LINE:
+      {
+          QGraphicsLineItem *line = addLine( _startPoint.x(), _startPoint.y(), _endPoint.x(), _endPoint.y() );
+          line->setFlag(QGraphicsItem::ItemIsMovable);
+          break;
       }
+
       
-      case TOOLS_ID_RECTANGLE:{
-	QGraphicsRectItem *rect = addRect(_startPoint.x(), _startPoint.y(), _endPoint.x() - _startPoint.x(), _endPoint.y() - _startPoint.y());
-	rect->setFlag(QGraphicsItem::ItemIsMovable);
-	break;
+      case TOOLS_ID_RECTANGLE:
+      {
+          QGraphicsRectItem *rect = addRect(_startPoint.x(), _startPoint.y(), _endPoint.x() - _startPoint.x(), _endPoint.y() - _startPoint.y());
+          rect->setFlag(QGraphicsItem::ItemIsMovable);
+          break;
       }
+
       
-      case TOOLS_ID_CIRCLE:{
-	QGraphicsEllipseItem *ellipse = addEllipse(_startPoint.x(), _startPoint.y(), _endPoint.x() - _startPoint.x(), _endPoint.y() - _startPoint.y());
-	ellipse->setFlag(QGraphicsItem::ItemIsMovable);
-	break;
+      case TOOLS_ID_CIRCLE:
+      {
+          QGraphicsEllipseItem *ellipse = addEllipse(_startPoint.x(), _startPoint.y(), _endPoint.x() - _startPoint.x(), _endPoint.y() - _startPoint.y());
+          ellipse->setFlag(QGraphicsItem::ItemIsMovable);
+          break;
       }
+
       
-      case TOOLS_ID_POLYGON:{
-	QGraphicsLineItem *line = addLine( _startPoint.x(), _startPoint.y(), _endPoint.x(), _endPoint.y() );
-	line->setFlag(QGraphicsItem::ItemIsMovable);
-	break;
+      case TOOLS_ID_POLYGON:
+      {
+          break;
+      }
+
+      case TOOLS_ID_TEXT:
+      {
+          QGraphicsTextItem *text = addText("Text");
+          text->setPos(_startPoint.x(), _startPoint.y());
+          text->setVisible(true);
+          text->setFlag(QGraphicsItem::ItemIsMovable);
+          break;
       }
     
     }
@@ -95,4 +107,8 @@ void PaintArea::setCurrentTool(int tool) {
   _currentTool = tool;
   qDebug () << _currentTool;
 }
+
+ QGraphicsItem *PaintArea::getItem(void){
+     return _item;
+ }
 

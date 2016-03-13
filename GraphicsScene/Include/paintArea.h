@@ -20,6 +20,7 @@ class PaintArea : public QGraphicsScene
 //   PaintArea(QWidget *parent = 0);
   public slots:
     void setCurrentTool(int);
+    QGraphicsItem * getItem(void);
   protected :
     void mousePressEvent(QGraphicsSceneMouseEvent* );
     void mouseMoveEvent(QGraphicsSceneMouseEvent* );
