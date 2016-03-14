@@ -20,6 +20,15 @@ class PaintArea : public QGraphicsScene
 //   PaintArea(QWidget *parent = 0);
   public slots:
     void setCurrentTool(int);
+    void setCurrentPenStyle(int);
+    void setCurrentBrushFill(int);
+    void setCurrentFont(QFont);
+    void setCurrentBrushColor(QColor);
+    void setCurrentPenColor(QColor);
+    void setCurrentPenWidth(int);
+    QPen getCurrentPen(void);
+    QBrush getCurrentBrush(void);
+    QFont getCurrentFont(void);
     QGraphicsItem * getItem(void);
   protected :
     void mousePressEvent(QGraphicsSceneMouseEvent* );
@@ -27,6 +36,11 @@ class PaintArea : public QGraphicsScene
     void mouseReleaseEvent(QGraphicsSceneMouseEvent* );
   private :
    int _currentTool;
+   QFont _currentFont;
+   QPen _currentPen;
+   QBrush _currentBrush;
+   QColor _currentBrushColor, _currentPenColor;
+   int _currentBrushWidth, _currentPenWidth;
    QPointF  _startPoint,_endPoint, _offset;
    QGraphicsItem * _item;
    QPolygon _polygon;

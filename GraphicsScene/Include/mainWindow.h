@@ -42,9 +42,14 @@ Q_OBJECT
    QAction *_aboutAction, *_aboutQtAction;
    QAction *_freehandAct, *_lineAct, *_rectangleAct, *_ellipseAct, *_polygonAct, *_textAct;
    QAction *_penColorAct, *_penWidthAct;
+   QAction *_penNoneAct,*_penSolidAct,*_penDashAct,*_penDotAct,*_penDashDotAct,*_penDashDotDotAct;
    QAction *_brushColorAct, *_brushFillAct;
+   QAction *_brushLinearAct, *_brushRadialAct, *_brushConicalAct, *_brushTextureAct,*_brushSolidAct,
+            *_brushHorAct, *_brushVerAct, *_brushCrossAct, *_brushBDAct, *_brushFDAct, *_brushDiagAct,
+            *_brushDense1Act, *_brushDense2Act, *_brushDense3Act, *_brushDense4Act, *_brushDense5Act,
+            *_brushDense6Act, *_brushDense7Act, *_brushNoneAct;
    QAction *_fontAct;
-   QActionGroup *_toolsQag;
+   QActionGroup *_toolsQag, *_penStylesQag, *_brushStylesQag;
    QSignalMapper *_signalMapper;
   private slots :
      void _newFile();

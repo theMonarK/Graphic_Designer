@@ -21,6 +21,23 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent)
     _signalMapper->setMapping(_polygonAct, TOOLS_ID_POLYGON);
     _signalMapper->setMapping(_textAct, TOOLS_ID_TEXT);
 
+    _signalMapper->setMapping(_penSolidAct, STYLE_PEN_ID_SOLID);
+    _signalMapper->setMapping(_penDashAct, STYLE_PEN_ID_DASH);
+    _signalMapper->setMapping(_penDotAct, STYLE_PEN_ID_DOT);
+    _signalMapper->setMapping(_penDashDotAct, STYLE_PEN_ID_DASHDOT);
+    _signalMapper->setMapping(_penDashDotDotAct,  STYLE_PEN_ID_DASHDOTDOT);
+    _signalMapper->setMapping(_penNoneAct, STYLE_PEN_ID_NONE);
+
+    _signalMapper->setMapping(_penNoneAct, STYLE_BRUSH_ID_NONE);
+    _signalMapper->setMapping(_brushSolidAct,  STYLE_BRUSH_ID_SOLID);
+    _signalMapper->setMapping(_brushBDAct, STYLE_BRUSH_ID_BDIAGONAL);
+    _signalMapper->setMapping(_brushFDAct, STYLE_BRUSH_ID_FDIAGONAL);
+    _signalMapper->setMapping(_brushDense3Act, STYLE_BRUSH_ID_DENSE3);
+    _signalMapper->setMapping(_brushDense4Act, STYLE_BRUSH_ID_DENSE4);
+    _signalMapper->setMapping(_brushDense5Act, STYLE_BRUSH_ID_DENSE5);
+    _signalMapper->setMapping(_brushDense6Act, STYLE_BRUSH_ID_DENSE6);
+
+
     _connectSignals();
 }
 
@@ -32,6 +49,7 @@ void MainWindow::_createMenus(void) {
  _penSubMenu = _styleMenu->addMenu("&Pen");
  _penLineSubMenu = _penSubMenu->addMenu("&Line");
  _brushSubMenu = _styleMenu->addMenu("&Brush");
+ _brushFillSubMenu=  _brushSubMenu->addMenu("&Fill");
  _helpMenu = menubar->addMenu( tr("&Help") );
 }
 
@@ -73,9 +91,44 @@ void MainWindow::_createActions(void) {
 
  _penColorAct = new QAction(tr("&Color"),  this);
  _penWidthAct = new QAction(tr("&Width"),  this);
+ _penStylesQag = new QActionGroup( this );
+ _penNoneAct = new QAction(tr("&None"),  this);
+ _penSolidAct = new QAction(tr("&Solid"),  this);
+ _penDashAct = new QAction(tr("&Dash"),  this);
+ _penDotAct = new QAction(tr("&Dot"),  this);
+ _penDashDotAct = new QAction(tr("&Dash Dot"),  this);
+ _penDashDotDotAct = new QAction(tr("&Dash Dot Dot"),  this);
+
+ _penNoneAct->setCheckable(true);
+ _penNoneAct->setChecked(true);
+ _penSolidAct->setCheckable(true);
+ _penDashAct->setCheckable(true);
+ _penDotAct->setCheckable(true);
+ _penDashDotAct->setCheckable(true);
+ _penDashDotDotAct->setChecked(true);
 
  _brushColorAct = new QAction(tr("&Color"),  this);
  _brushFillAct = new QAction(tr("&Fill"),  this);
+ _brushStylesQag = new QActionGroup( this );
+ _brushNoneAct = new QAction(tr("&None"),  this);
+ _brushSolidAct = new QAction(tr("&Solid"),  this);
+ _brushBDAct = new QAction(tr("&B Diagonal"),  this);
+ _brushFDAct = new QAction(tr("&F Diagonal"),  this);
+ _brushDense3Act = new QAction(tr("&Dense 3"),  this);
+ _brushDense4Act = new QAction(tr("&Dense 4"),  this);
+ _brushDense5Act = new QAction(tr("&Dense 5"),  this);
+ _brushDense6Act = new QAction(tr("&Dense 6"),  this);
+
+ _brushNoneAct->setCheckable(true);
+ _brushNoneAct->setChecked(true);
+ _brushSolidAct->setCheckable(true);
+ _brushBDAct->setCheckable(true);
+ _brushFDAct->setCheckable(true);
+ _brushDense3Act->setCheckable(true);
+ _brushDense4Act->setChecked(true);
+ _brushDense5Act->setCheckable(true);
+ _brushDense6Act->setCheckable(true);
+
  _fontAct = new QAction(tr("&Font"),  this);
 
  _toolsQag = new QActionGroup( this );
@@ -93,6 +146,7 @@ void MainWindow::_createActions(void) {
  _ellipseAct->setCheckable(true);
  _polygonAct->setCheckable(true);
  _textAct->setCheckable(true);
+ _penNoneAct->setChecked(true);
 }
 
 void MainWindow::_connectActions(void) {
@@ -130,9 +184,39 @@ void MainWindow::_connectActions(void) {
 
  _penSubMenu->addAction(_penColorAct);
  _penSubMenu->addAction(_penWidthAct);
+ _penStylesQag->addAction(_penNoneAct);
+ _penStylesQag->addAction(_penSolidAct);
+ _penStylesQag->addAction(_penDashAct);
+ _penStylesQag->addAction(_penDotAct);
+ _penStylesQag->addAction(_penDashDotAct);
+ _penStylesQag->addAction(_penDashDotDotAct);
+
+ _penLineSubMenu->addAction(_penNoneAct);
+ _penLineSubMenu->addAction(_penSolidAct);
+ _penLineSubMenu->addAction(_penDashAct);
+ _penLineSubMenu->addAction(_penDotAct);
+ _penLineSubMenu->addAction(_penDashDotAct);
+ _penLineSubMenu->addAction(_penDashDotDotAct);
+
 
  _brushSubMenu->addAction(_brushColorAct);
- _brushSubMenu->addAction(_brushFillAct);
+ _brushStylesQag->addAction(_brushNoneAct);
+ _brushStylesQag->addAction(_brushSolidAct);
+ _brushStylesQag->addAction(_brushBDAct);
+ _brushStylesQag->addAction(_brushFDAct);
+ _brushStylesQag->addAction(_brushDense3Act);
+ _brushStylesQag->addAction(_brushDense4Act);
+ _brushStylesQag->addAction(_brushDense5Act);
+ _brushStylesQag->addAction(_brushDense6Act);
+
+ _brushFillSubMenu->addAction(_brushNoneAct);
+ _brushFillSubMenu->addAction(_brushSolidAct);
+ _brushFillSubMenu->addAction(_brushBDAct);
+ _brushFillSubMenu->addAction(_brushFDAct);
+ _brushFillSubMenu->addAction(_brushDense3Act);
+ _brushFillSubMenu->addAction(_brushDense4Act);
+ _brushFillSubMenu->addAction(_brushDense5Act);
+ _brushFillSubMenu->addAction(_brushDense6Act);
 }
 
 void MainWindow::_connectSignals(void) {
@@ -145,9 +229,22 @@ void MainWindow::_connectSignals(void) {
 
  connect(_penColorAct, SIGNAL(triggered()), this, SLOT(_penColor()));
  connect(_penWidthAct, SIGNAL(triggered()), this, SLOT(_penWidth()));
+ connect(_penNoneAct,SIGNAL(activated()),_signalMapper, SLOT(map()));
+ connect(_penSolidAct,SIGNAL(activated()),_signalMapper, SLOT(map()));
+ connect(_penDashAct,SIGNAL(activated()),_signalMapper, SLOT(map()));
+ connect(_penDotAct,SIGNAL(activated()),_signalMapper, SLOT(map()));
+ connect(_penDashDotAct,SIGNAL(activated()),_signalMapper, SLOT(map()));
+ connect(_penDashDotDotAct,SIGNAL(activated()),_signalMapper, SLOT(map()));
 
  connect(_brushColorAct, SIGNAL(triggered()), this, SLOT(_brushColor()));
- connect(_brushFillAct, SIGNAL(triggered()), this, SLOT(_brushFill()));
+ connect(_brushNoneAct,SIGNAL(activated()),_signalMapper, SLOT(map()));
+ connect(_brushSolidAct,SIGNAL(activated()),_signalMapper, SLOT(map()));
+ connect(_brushBDAct,SIGNAL(activated()),_signalMapper, SLOT(map()));
+ connect(_brushFDAct,SIGNAL(activated()),_signalMapper, SLOT(map()));
+ connect(_brushDense3Act,SIGNAL(activated()),_signalMapper, SLOT(map()));
+ connect(_brushDense4Act,SIGNAL(activated()),_signalMapper, SLOT(map()));
+ connect(_brushDense5Act,SIGNAL(activated()),_signalMapper, SLOT(map()));
+ connect(_brushDense6Act,SIGNAL(activated()),_signalMapper, SLOT(map()));
 
  connect(_fontAct, SIGNAL(triggered()), this, SLOT(_font()));
 
@@ -156,6 +253,7 @@ void MainWindow::_connectSignals(void) {
  connect(_rectangleAct,SIGNAL(activated()),_signalMapper, SLOT(map()));
  connect(_ellipseAct,SIGNAL(activated()),_signalMapper, SLOT(map()));
  connect(_polygonAct,SIGNAL(activated()),_signalMapper, SLOT(map()));
+ connect(_textAct,SIGNAL(activated()),_signalMapper, SLOT(map()));
 
  connect(_signalMapper,SIGNAL(mapped(int)), this, SIGNAL(toolMapped(int)));
  connect(this, SIGNAL(toolMapped(int)), _area, SLOT(setCurrentTool(int)) );
@@ -168,37 +266,70 @@ void MainWindow::_newFile(void) {
  qDebug() << str ;
  statusBar()->showMessage(str);
  int ret = QMessageBox::warning(this, tr("New File"),
-                                tr("New File.\n"
-                                   "Do you want to save your changes?"),
+                                tr("New File.\n\n"
+                                   "You are opening a new file. \n Save your current work?"),
                                 QMessageBox::Save | QMessageBox::Discard
                                 | QMessageBox::Cancel,
                                 QMessageBox::Save);
+ switch (ret) {
+   case QMessageBox::Save:{
+       _saveFile();
+       break;
+     }
+   case QMessageBox::Discard:{
+       _area->clear();
+       break;
+    }
+   case QMessageBox::Cancel:{
+       break;
+    }
+ }
 }
 
 void MainWindow::_openFile(void) {
  qDebug() << "MainWindow::openFile(void)";
-  QString filename =  QFileDialog::getOpenFileName(this,tr("Open Image"), tr("Image Files (*.png *.jpg *.bmp)"));
+  QString fileName = QFileDialog::getOpenFileName(this,tr("Open Image"), "", tr("Image Files (*.png *.jpg *.bmp)"));
+  if (fileName!=NULL){
+
+  }
 }
 
 void MainWindow::_saveFile(void) {
  qDebug() << "MainWindow::saveFile(void)";
- QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"));
+ QString fileName = QFileDialog::getSaveFileName(this, tr("Save File"),".png",  tr("Image Files (*.png *.jpg *.bmp)"));
+ if(fileName!=NULL){
+
+ }
 }
 
 void MainWindow::_exit(void) {
 qDebug()<< "MainWindow::_exit(void)" ;
-QMessageBox msgBox;
-msgBox.setText("You are about to quit the application");
-msgBox.setInformativeText("Do you want to save your changes?");
-msgBox.setStandardButtons(QMessageBox::Save | QMessageBox::Discard | QMessageBox::Cancel);
-msgBox.setDefaultButton(QMessageBox::Save);
-int ret = msgBox.exec();
+int ret = QMessageBox::warning(this, tr("Quit"),
+                               tr("Quit.\n\n"
+                                  "You are about to quit the application. \n Save your current work?"),
+                               QMessageBox::Save | QMessageBox::Discard
+                               | QMessageBox::Cancel,
+                               QMessageBox::Save);
+switch (ret) {
+  case QMessageBox::Save:{
+      _saveFile();
+      break;
+    }
+  case QMessageBox::Discard:{
+      qDebug()<< "Close()";
+      close();
+      break;
+   }
+  case QMessageBox::Cancel:{
+      break;
+   }
+}
 }
 
 void MainWindow::_about() {
  qDebug()<< "MainWindow::_aboutUs()" ;
  QMessageBox::information( this,
-                           "Editeur graphique Version 0.1 Bêta \n",
+                           "Editeur graphique Version 0.1 Bêta \n\n",
                            "ENIB module CAI \nAnthony Guillier \nCopyright 2015/2016",
                            "Ok");
 }
@@ -211,7 +342,10 @@ void MainWindow::_aboutQt() {
 
 void MainWindow::_penColor() {
  qDebug()<< "MainWindow::_penColor()" ;
- QColor color = QColorDialog::getColor();
+ QColor color = QColorDialog::getColor(_area->getCurrentPen().color());
+ if(color.isValid()){
+ _area->setCurrentPenColor(color);
+ }
 }
 
 void MainWindow::_penWidth() {
@@ -225,12 +359,18 @@ void MainWindow::_penWidth() {
      font->setPixelSize(25);
 
      penWidthSpin->setFont(*font);
+     penWidthSpin->setValue(_area->getCurrentPen().width());
      penWidthSpin->show();
+     connect(penWidthSpin,SIGNAL(valueChanged(int)),_area,SLOT(setCurrentPenWidth(int)));
 }
 
 void MainWindow::_brushColor() {
  qDebug()<< "MainWindow::_brushColor()" ;
- QColor color = QColorDialog::getColor();
+ QColor color = QColorDialog::getColor(_area->getCurrentBrush().color());
+ if(color.isValid()){
+     _area->setCurrentBrushColor(color);
+     qDebug()<<_area->getCurrentBrush().color();
+ }
 }
 
 void MainWindow::_brushFill() {
@@ -251,12 +391,10 @@ void MainWindow::_font() {
  qDebug()<< "MainWindow::_font()" ;
  bool ok;
  QFont font = QFontDialog::getFont(
-                 &ok, QFont("Helvetica [Cronyx]", 10), this);
+                 &ok, _area->getCurrentFont(), this);
+
  if (ok) {
-     // the user clicked OK and font is set to the font the user selected
- } else {
-     // the user canceled the dialog; font is set to the initial
-     // value, in this case Helvetica [Cronyx], 10
+     _area->setCurrentFont(font);
  }
 }
 
