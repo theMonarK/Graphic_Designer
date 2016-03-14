@@ -373,20 +373,6 @@ void MainWindow::_brushColor() {
  }
 }
 
-void MainWindow::_brushFill() {
- qDebug()<< "MainWindow::_brushFill()" ;
- QSpinBox* _brushFillSpin = new QSpinBox();
-     _brushFillSpin->setWindowTitle("Brush Fill");
-     _brushFillSpin->setFixedSize(150,50);
-
-     QFont* font = new QFont();
-     font->setBold(true);
-     font->setPixelSize(25);
-
-     _brushFillSpin->setFont(*font);
-     _brushFillSpin->show();
-}
-
 void MainWindow::_font() {
  qDebug()<< "MainWindow::_font()" ;
  bool ok;

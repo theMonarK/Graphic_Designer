@@ -61,7 +61,6 @@ Q_OBJECT
      void _penColor();
      void _penWidth();
      void _brushColor();
-     void _brushFill();
      void _font();
   signals:
    void toolMapped(int digit);
